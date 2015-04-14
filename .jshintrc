@@ -1,0 +1,6 @@
+{
+  "globalstrict": false,
+  "node": true,
+  "loopfunc": true,
+  "expr": true
+}
