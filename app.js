@@ -18,7 +18,8 @@ app.get(/geocode/, function(req, res) {
     });
 });
 
-geocoder.init('/pushspring/lib/geonames', function() {
+console.log('Loading geocoding data');
+geocoder.init(function() {
     var port = Number(process.env.PORT || 3000);
     app.listen(port, function() {
         console.log('Local reverse postal code geocoder listening on port ' + port);

@@ -1,4 +1,4 @@
-#Local Reverse Postal Code Geocoder
+# Local Reverse Postal Code Geocoder
 
 This library provides a local reverse postal code geocoder for Node.js that is based on
 [GeoNames](http://download.geonames.org/export/zip/) data. It is *local*
@@ -8,16 +8,18 @@ and in consequence the gecoder is suitable for batch reverse geocoding.
 It is *reverse* in the sense that you give it a (list of) point(s), *i.e.*,
 a latitude/longitude pair, and it returns the postal code to that point.
 
-#Installation
+# Installation
 
 ```bash
 $ npm install local-reverse-postal code
 ```
 
-#Usage
+# Usage
+
+# Lookup
 
 ```javascript
-var geocoder = require('local-reverse-postal code');
+var geocoder = require('local-reverse-postalcode');
 
 // With just one point
 var point = {latitude: 42.083333, longitude: 3.1};
@@ -54,26 +56,135 @@ geocoder.lookUp(points, maxResults, function(err, res) {
 });
 ```
 
+## Init
+
+You can optionally initialize the geocoder prior to the first call to lookUp.  This ensures
+that all files are loaded into the cache prior to making the first call. 
+
+```javascript
+var geocoder = require('local-reverse-postalcode');
+
+geocoder.init(function() {
+  // geocoder is loaded and ready to run
+});
+```
+
+Optionally init allows you to specify the directory that geonames files are downloaded and cached in.
+
+```javascript
+var geocoder = require('local-reverse-postalcode');
+
+geocoder.init({cacheDirectory: '/tmp/geonames'}, function() {
+  // Ready to call lookUp and all files will be downloaded to /tmp/geonames
+});
+
+```
+
+# Usage of the Web Service
+
+You can use the built-in Web service by running `node app.js` as follows.
+
+```bash
+$ curl "http://localhost:3000/geocode?latitude=48.466667&longitude=9.133333"
+```
+
+# Result Format
+
+An output array that maps each point in the input array (or input object converted to a single-element array) to the `maxResults` closest postal codes.
+
+```javascript
+[
+   {
+      "countryCode":"US",
+      "postalCode":"10018",
+      "placeName":"New York City",
+      "adminName1":"New York",
+      "adminCode1":"NY",
+      "adminName2":"New York",
+      "adminCode2":"061",
+      "adminName3":null,
+      "adminCode3":null,
+      "latitude":"40.7547",
+      "longitude":"-73.9925",
+      "accuracy":null,
+      "distance":0.01717469835623254
+   },
+   {
+      "countryCode":"US",
+      "postalCode":"10122",
+      "placeName":"New York City",
+      "adminName1":"New York",
+      "adminCode1":"NY",
+      "adminName2":"New York",
+      "adminCode2":"061",
+      "adminName3":null,
+      "adminCode3":null,
+      "latitude":"40.7518",
+      "longitude":"-73.9922",
+      "accuracy":null,
+      "distance":0.328619663752171
+   },
+   {
+      "countryCode":"US",
+      "postalCode":"10123",
+      "placeName":"New York City",
+      "adminName1":"New York",
+      "adminCode1":"NY",
+      "adminName2":"New York",
+      "adminCode2":"061",
+      "adminName3":null,
+      "adminCode3":null,
+      "latitude":"40.7515",
+      "longitude":"-73.9905",
+      "accuracy":null,
+      "distance":0.4042385734624632
+   },
+   {
+      "countryCode":"US",
+      "postalCode":"10120",
+      "placeName":"New York City",
+      "adminName1":"New York",
+      "adminCode1":"NY",
+      "adminName2":"New York",
+      "adminCode2":"061",
+      "adminName3":null,
+      "adminCode3":null,
+      "latitude":"40.7506",
+      "longitude":"-73.9894",
+      "accuracy":null,
+      "distance":0.5368946061124421
+   },
+   {
+      "countryCode":"US",
+      "postalCode":"10121",
+      "placeName":"New York City",
+      "adminName1":"New York",
+      "adminCode1":"NY",
+      "adminName2":"New York",
+      "adminCode2":"061",
+      "adminName3":null,
+      "adminCode3":null,
+      "latitude":"40.7496",
+      "longitude":"-73.9919",
+      "accuracy":null,
+      "distance":0.5745045613406756
+   }
+]
+```
+
 #A Word on Speed
 
-The initial lookup takes quite a while, as the geocoder has to download roughly
-300MB of data that it then caches locally (unzipped, this occupies about 1.3GB
+The call to init takes quite a while, as the geocoder has to download roughly
+9MB of data that it then caches locally (unzipped, this occupies about 76MB
 of disk space). All follow-up requests are lightning fast.
 
-#A Word on Accuracy
+If you can deploy the data ahead of time the download/unzip process is eliminated 
+but parsing and loading data structures takes a bit of time.
 
-By design, *i.e.*, due to the granularity of the available
-[GeoNames data](http://download.geonames.org/export/dump/cities1000.zip),
-this reverse geocoder is limited to city-level, so no streets or house numbers.
-In many cases this is already sufficient, but obviously your actual mileage may
-vary. If you need street-level granularity, you are better off with a service
-like Google's
-[reverse geocoding API](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding).
-(Full disclosure: the author is currently employed by Google.)
 
 #License
 
-Copyright 2015 Chirs Kinsman (chris@kinsman.net)
+Copyright 2015 Chris Kinsman (chris@kinsman.net)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

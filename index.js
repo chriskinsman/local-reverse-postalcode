@@ -35,9 +35,10 @@ var fs = require('fs');
 var path = require('path');
 var kdTree = require('kdt');
 var request = require('request');
-var unzip = require('unzip');
+var unzip = require('unzip2');
 var lazy = require('lazy.js');
 var async = require('async');
+var _ = require('lodash');
 
 // All data from http://download.geonames.org/export/zip/
 var GEONAMES_URL = 'http://download.geonames.org/export/zip/';
@@ -182,12 +183,19 @@ var geocoder = {
         });
     },
 
-    init: function init(cacheDir, callback) {
+    init: function init(options, callback) {
         if (arguments.length === 1) {
-            callback = cacheDir;
+            callback = options;
         }
         else {
-            GEONAMES_CACHE_DIR = cacheDir;
+            options = options || {};
+            if(options.cacheDirectory) {
+                GEONAMES_CACHE_DIR = options.cacheDirectory;
+            }
+
+            if(options.debug !== undefined) {
+                DEBUG = options.debug;
+            }
         }
 
         DEBUG && console.log('Initializing local reverse postal code geocoder and using cache directory: ' + GEONAMES_CACHE_DIR);
@@ -257,7 +265,8 @@ var geocoder = {
                         zipCodeList.push(zipCode[0]);
                     });
                 }
-                return innerCallback(null, zipCodeList);
+
+                return innerCallback(null, _.sortBy(zipCodeList, 'distance'));
             };
         });
         async.series(
