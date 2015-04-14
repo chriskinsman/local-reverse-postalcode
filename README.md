@@ -1,23 +1,23 @@
-#Local Reverse ZipCode Geocoder
+#Local Reverse Postal Code Geocoder
 
-This library provides a local reverse zipcode geocoder for Node.js that is based on
+This library provides a local reverse postal code geocoder for Node.js that is based on
 [GeoNames](http://download.geonames.org/export/zip/) data. It is *local*
 in the sense that there are no calls to a remote service like the
 [Google Maps API](https://developers.google.com/maps/documentation/javascript/geocoding#ReverseGeocoding),
 and in consequence the gecoder is suitable for batch reverse geocoding.
 It is *reverse* in the sense that you give it a (list of) point(s), *i.e.*,
-a latitude/longitude pair, and it returns the zip code to that point.
+a latitude/longitude pair, and it returns the postal code to that point.
 
 #Installation
 
 ```bash
-$ npm install local-reverse-zipcode
+$ npm install local-reverse-postal code
 ```
 
 #Usage
 
 ```javascript
-var geocoder = require('local-reverse-zipcode');
+var geocoder = require('local-reverse-postal code');
 
 // With just one point
 var point = {latitude: 42.083333, longitude: 3.1};
