@@ -184,7 +184,7 @@ but parsing and loading data structures takes a bit of time.
 
 #License
 
-Copyright 2015 Chris Kinsman (chris@kinsman.net)
+Copyright 2015-2018 Chris Kinsman (chris@kinsman.net)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

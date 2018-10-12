@@ -29,13 +29,13 @@
 
 'use strict';
 
-var DEBUG = false;
+var DEBUG = true;
 
 var fs = require('fs');
 var path = require('path');
 var kdTree = require('kdt');
 var request = require('request');
-var unzip = require('unzip2');
+var unzip = require('node-unzip-2');
 var lazy = require('lazy.js');
 var async = require('async');
 var _ = require('lodash');

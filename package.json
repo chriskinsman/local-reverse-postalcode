@@ -1,8 +1,12 @@
 {
   "name": "local-reverse-postalcode",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Given a lat/long lookup the closest postal code",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chriskinsman/local-reverse-postalcode"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,14 +19,14 @@
     "postal"
   ],
   "author": "Chris Kinsman",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "dependencies": {
     "kdt": "~0.1.0",
-    "async": "~0.9.0",
-    "lazy.js": "~0.4.0",
-    "unzip2": "~0.2.5",
-    "express": "~4.12.3",
-    "request": "~2.55.0",
-    "lodash": "~3.6.0"
+    "async": "~1.5.2",
+    "lazy.js": "~0.5.1",
+    "node-unzip-2": "~0.2.7",
+    "express": "~4.16.4",
+    "request": "~2.88.0",
+    "lodash": "~3.10.1"
   }
 }
