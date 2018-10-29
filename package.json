@@ -1,6 +1,6 @@
 {
   "name": "local-reverse-postalcode",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Given a lat/long lookup the closest postal code",
   "main": "index.js",
   "repository": {
@@ -27,6 +27,6 @@
     "node-unzip-2": "~0.2.7",
     "express": "~4.16.4",
     "request": "~2.88.0",
-    "lodash": "~3.10.1"
+    "lodash": "~4.17.11"
   }
 }
